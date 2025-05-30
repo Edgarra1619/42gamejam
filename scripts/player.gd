@@ -44,3 +44,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_dash_timer_timeout() -> void:
 	in_dash = false
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	set_deferred("process_mode", PROCESS_MODE_DISABLED)
