@@ -5,7 +5,6 @@ const	ROTATION_SPEED = 8
 const	MAX_SPEED = 300
 
 static var potion : PackedScene = preload("res://scenes/potion.tscn")
-static var splash : PackedScene = preload("res://scenes/potion.tscn")
 
 var target_position : Vector2
 
@@ -23,9 +22,6 @@ func _physics_process(delta: float) -> void:
 		_explode();
 
 func _explode() -> void:
-	var splash_node := splash.instantiate()
-	splash_node.global_position = global_position
-	get_tree().current_scene.add_child(splash_node)
 	queue_free()
 
 func _on_body_entered(_body:Node2D) -> void:
