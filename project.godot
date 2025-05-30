@@ -20,6 +20,10 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/vsync/vsync_mode=0
 
+[gui]
+
+common/swap_cancel_ok=true
+
 [input]
 
 move_up={
