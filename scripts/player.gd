@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-@export var movement_speed: int = 300
-@export var dash_speed: int = 1800
+@export var movement_speed: int = 800
+@export var dash_speed: int = 8000
 @export var potion: PackedScene
 var in_dash: bool = false
 var dash_destination: Vector2
