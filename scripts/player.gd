@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 @export var movement_speed: int = 800
@@ -5,15 +6,22 @@ extends CharacterBody2D
 @export var potion: PackedScene
 var in_dash: bool = false
 var dash_destination: Vector2
+static var player : Player
 
 func _ready() -> void:
+	player = self
 	pass
 
-func _process(delta: float) -> void:
+func throw() -> void:
+	var pos : Vector2 = get_global_mouse_position()
+	var new_potion : Potion = Potion.new_potion(pos)
+	get_tree().current_scene.add_child(new_potion)
+	new_potion.global_position = global_position
+
+
+func _process(_delta: float) -> void:
 	if (Input.is_action_just_pressed("throw_potion")):
-		var new_potion = potion.instantiate()
-		new_potion.position = get_global_mouse_position()
-		get_tree().current_scene.add_child(new_potion)
+		throw()
 
 func _physics_process(delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
