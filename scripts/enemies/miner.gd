@@ -2,8 +2,10 @@ class_name Miner
 extends Enemy
 
 func _ready() -> void:
+	$Sprite2D.modulate = Color.RED
 	movement_speed = 350 # slower enemy at first
 	health = 9
+	super()
 
 func _process(delta: float) -> void:
 	super(delta)
@@ -11,5 +13,9 @@ func _process(delta: float) -> void:
 		rage_mode()
 		
 func rage_mode() -> void:
-	movement_speed = 450
+	movement_speed = 750
+	$HoleTimer.start()
 	$Sprite2D.modulate = Color.RED
+	
+func dig_hole() -> void:
+	pass

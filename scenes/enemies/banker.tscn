@@ -1,20 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7v3adii36nbx"]
+[gd_scene load_steps=4 format=3 uid="uid://dfpjpy4dhcc8i"]
 
-[ext_resource type="Texture2D" uid="uid://cv6fbkctp6lfs" path="res://icon.svg" id="1_7p1mj"]
-[ext_resource type="Script" uid="uid://duls7htk3vck6" path="res://scripts/enemy.gd" id="1_md0e3"]
+[ext_resource type="Script" uid="uid://tqicowtfhi6j" path="res://scripts/enemies/banker.gd" id="1_g6001"]
+[ext_resource type="Texture2D" uid="uid://cv6fbkctp6lfs" path="res://icon.svg" id="2_k1dhy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
 size = Vector2(96, 96)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="banker" type="CharacterBody2D"]
 z_index = 80
 collision_layer = 2
-collision_mask = 9
-script = ExtResource("1_md0e3")
+collision_mask = 0
+script = ExtResource("1_g6001")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 1)
-texture = ExtResource("1_7p1mj")
+texture = ExtResource("2_k1dhy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_md0e3")
@@ -28,5 +28,13 @@ one_shot = true
 wait_time = 5.0
 one_shot = true
 
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_md0e3")
+
 [connection signal="timeout" from="PoisonDamageTimer" to="." method="_receive_poison_damage"]
 [connection signal="timeout" from="GoldTimer" to="." method="break_free"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_body_entered"]

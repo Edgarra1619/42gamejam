@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="42gamejam"
+run/main_scene="uid://vuqgeva383kk"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -20,6 +21,10 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=0
+
+[gui]
+
+common/swap_cancel_ok=true
 
 [input]
 
