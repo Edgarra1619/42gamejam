@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://du1neusdsqvcq"]
+
+[ext_resource type="PackedScene" uid="uid://ru3ee7bceavx" path="res://scenes/player.tscn" id="1_tlxqq"]
+[ext_resource type="PackedScene" uid="uid://dvcq7txufutbb" path="res://scenes/enemies/miner.tscn" id="2_splqn"]
+[ext_resource type="PackedScene" uid="uid://b7v3adii36nbx" path="res://scenes/enemy.tscn" id="4_1wf28"]
+
+[node name="TestScene" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("1_tlxqq")]
+position = Vector2(59, -16)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, 2)
+
+[node name="miner" parent="." instance=ExtResource("2_splqn")]
+position = Vector2(787, -379)
+
+[node name="enemy" parent="." instance=ExtResource("4_1wf28")]
+position = Vector2(-705, -378)
