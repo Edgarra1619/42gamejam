@@ -11,12 +11,12 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	if goldified:
-		gold_timer -= delta;
-		if gold_timer <= 0:
-			break_free()
 	if (health <= 0):
 		_die()
+	if goldified:
+		gold_timer -= delta
+		if gold_timer <= 0:
+			break_free()
 
 func _physics_process(delta: float) -> void:
 	if (goldified):
@@ -34,9 +34,11 @@ func _die() -> void:
 func receive_damage(damage: int) -> void:
 	health -= damage
 
-func turn_gold(duration: float = 2.0) -> void:
-	if (duration <= 1.0):
-		return
+func turn_gold() -> void:
+	var duration: float = 5.0
+	#duration -= health
+	#if (duration <= 0): Turn on if we decide to go back to gold time depending on health
+	#	return
 	goldified = true
 	gold_timer = duration
 	velocity = Vector2.ZERO
