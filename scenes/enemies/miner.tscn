@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6wrd1fdfuj61"]
+[gd_scene load_steps=4 format=3 uid="uid://dvcq7txufutbb"]
 
 [ext_resource type="Script" uid="uid://d15yk610fqn0y" path="res://scripts/enemies/miner.gd" id="1_0jb3l"]
 [ext_resource type="Texture2D" uid="uid://cv6fbkctp6lfs" path="res://icon.svg" id="2_ko751"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
-size = Vector2(128, 128)
+size = Vector2(96, 96)
 
-[node name="miner" type="CharacterBody2D"]
+[node name="Miner" type="CharacterBody2D"]
+z_index = 80
 collision_layer = 2
 script = ExtResource("1_0jb3l")
 
@@ -18,5 +19,8 @@ texture = ExtResource("2_ko751")
 shape = SubResource("RectangleShape2D_md0e3")
 
 [node name="PoisonDamageTimer" type="Timer" parent="."]
+
+[node name="SlowTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="PoisonDamageTimer" to="." method="_receive_poison_damage"]
