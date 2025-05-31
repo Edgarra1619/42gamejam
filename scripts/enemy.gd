@@ -23,3 +23,10 @@ func _die() -> void:
 
 func receive_damage(damage: int) -> void:
 	health -= damage
+
+func get_poisoned() -> void:
+	$Sprite2D.modulate = Color(0.5, 0, 0.5, 1)
+	$PoisonDamageTimer.start()
+
+func _receive_poison_damage() -> void:
+	receive_damage(1)
