@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://nh08bbdxyung"]
+
+[ext_resource type="Script" uid="uid://dio7c7y3464a0" path="res://scripts/hole.gd" id="1_iyxdx"]
+[ext_resource type="Texture2D" uid="uid://cv6fbkctp6lfs" path="res://icon.svg" id="1_lerre"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iyxdx"]
+size = Vector2(96, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a2ebe"]
+size = Vector2(98, 98)
+
+[node name="Hole" type="StaticBody2D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_iyxdx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(2.86102e-06, 2.86102e-06)
+texture = ExtResource("1_lerre")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_iyxdx")
+
+[node name="FallArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallArea"]
+shape = SubResource("RectangleShape2D_a2ebe")
+
+[connection signal="body_entered" from="FallArea" to="." method="_player_entered"]

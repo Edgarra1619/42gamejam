@@ -3,7 +3,7 @@ extends Enemy
 
 func _ready() -> void:
 	movement_speed = 350 # slower enemy at first
-	health = 10
+	health = 9
 
 func _process(delta: float) -> void:
 	super(delta)
