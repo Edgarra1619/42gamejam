@@ -9,7 +9,7 @@ static var potion: PackedScene = preload("res://scenes/potion.tscn")
 @onready var dest_clock: Timer = Timer.new()
 var target_position: Vector2
 var impact_damage: int
-var has_exploded: bool = false
+#var has_exploded: bool = false
 
 static func new_potion(pos: Vector2) -> Potion:
 	var newpot : Potion = potion.instantiate()
@@ -24,6 +24,8 @@ func _process(delta: float) -> void:
 		rotate(delta * ROTATION_SPEED)
 
 func _physics_process(delta: float) -> void:
+	if (!dest_clock.is_stopped()):
+		return
 	global_position = global_position.move_toward(target_position, delta * MAX_SPEED)
 	if (global_position.is_equal_approx(target_position)):
 		_explode();
@@ -37,8 +39,11 @@ func _explode() -> void:
 		queue_free()
 	)
 	dest_clock.start()
-	has_exploded = true
+#	has_exploded = true
 
 func _on_body_entered(_body: Node2D) -> void:
+	if (!dest_clock.is_stopped()):
+		return
+	if (_body is Enemy):
+		_body.receive_damage(impact_damage)
 	_explode()
-	_body.receive_damage(impact_damage)
