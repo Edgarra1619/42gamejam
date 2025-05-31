@@ -5,6 +5,7 @@ func _ready() -> void:
 	$Sprite2D.modulate = Color.RED
 	movement_speed = 350 # slower enemy at first
 	health = 9
+	cause_rush_chance = 50
 	super()
 
 func _process(delta: float) -> void:

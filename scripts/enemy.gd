@@ -6,6 +6,7 @@ extends CharacterBody2D
 var 			health: int = 3
 var				is_slowed: bool = false
 var				goldified: bool = false
+var				cause_rush_chance: int
 var				target: Node2D
 
 func _ready() -> void:
@@ -60,24 +61,18 @@ func turn_gold() -> void:
 	$GoldTimer.start()
 	activate_gold_rush()
 
-#func activate_gold_rush() -> void:
-	#gold_rush_aoe.monitoring = true
-	#await get_tree().process_frame
-	#var fools = gold_rush_aoe.get_overlapping_bodies()
-	#for fool in fools:
-		#if fool is Enemy and fool != self:
-			#fool.get_gold_rush(self)
-	#gold_rush_aoe.monitoring = false
 
 func activate_gold_rush() -> void:
 	gold_rush_aoe.monitoring = true
 	await get_tree().process_frame
 	var fools = gold_rush_aoe.get_overlapping_bodies()
-	print("Gold rush detected bodies count: ", fools.size())
 	for fool in fools:
-		print("Detected:", fool, "is Enemy?", fool is Enemy)
-		if fool is Enemy and fool != self:
-			fool.get_gold_rush(self)
+		if fool is Banker and fool != self:
+			if randi () % 150 < self.cause_gold_chance:
+				fool.get_gold_rush(self)
+		elif fool is Peasant and fool != self:
+			if randi() % 100 < self.cause_rush_chance:
+				fool.get_gold_rush(self)
 	gold_rush_aoe.monitoring = false
 
 

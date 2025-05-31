@@ -8,6 +8,7 @@ func _ready() -> void:
 	$Sprite2D.modulate = Color.DEEP_PINK
 	health = 6
 	movement_speed = 450
+	cause_rush_chance = 35
 	super()
 
 func _on_body_entered(body: Node) -> void:
