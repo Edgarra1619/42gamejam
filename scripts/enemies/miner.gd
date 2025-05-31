@@ -11,7 +11,14 @@ func _process(delta: float) -> void:
 	super(delta)
 	if health <= 5:
 		rage_mode()
-		
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body is Player:
+		#Player.player.lose_potion()
+		#Player.player.lose_potion() <- TODO
+		pass
+	pass
+
 func rage_mode() -> void:
 	movement_speed = 750
 	$HoleTimer.start()

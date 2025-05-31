@@ -5,7 +5,7 @@ extends Enemy
 var			target_escape: Node2D
 
 func _ready() -> void:
-	$Sprite2D.modulate = Color.ORANGE
+	$Sprite2D.modulate = Color.DEEP_PINK
 	health = 6
 	movement_speed = 450
 	super()

@@ -7,7 +7,7 @@ func _ready() -> void:
 	movement_speed = 400
 	super()
 
-func _on_hitbox_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body is Player:
 		#Player.player.lose_potion() <- TODO
 		movement_speed = 0
