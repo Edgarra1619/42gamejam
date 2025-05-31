@@ -15,7 +15,7 @@ initial_velocity_max = 103.45
 gravity = Vector3(0, 98, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xy15j"]
-size = Vector2(256, 256)
+size = Vector2(384, 384)
 
 [node name="PurplePotion" type="Area2D"]
 z_index = 110

@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvcq7txufutbb"]
+[gd_scene load_steps=5 format=3 uid="uid://dvcq7txufutbb"]
 
 [ext_resource type="Script" uid="uid://d15yk610fqn0y" path="res://scripts/enemies/miner.gd" id="1_0jb3l"]
 [ext_resource type="Texture2D" uid="uid://cv6fbkctp6lfs" path="res://icon.svg" id="2_ko751"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
 size = Vector2(96, 96)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hqish"]
+radius = 573.022
 
 [node name="Miner" type="CharacterBody2D"]
 z_index = 80
@@ -30,6 +33,28 @@ one_shot = true
 [node name="HoleTimer" type="Timer" parent="."]
 wait_time = 3.0
 
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="HitboxArea" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_md0e3")
+
+[node name="GoldRushTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="GoldRushAOE" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 2
+monitoring = false
+
+[node name="SphereAOE" type="CollisionShape2D" parent="GoldRushAOE"]
+shape = SubResource("CircleShape2D_hqish")
+debug_color = Color(0.792157, 0.427451, 0, 0.192157)
+
 [connection signal="timeout" from="PoisonDamageTimer" to="." method="_receive_poison_damage"]
 [connection signal="timeout" from="GoldTimer" to="." method="break_free"]
 [connection signal="timeout" from="HoleTimer" to="." method="dig_hole"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

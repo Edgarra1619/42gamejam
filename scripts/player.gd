@@ -4,7 +4,7 @@ extends CharacterBody2D
 signal switched_potion
 signal updated_potion
 
-static var player : Player
+static var player: Player
 
 @export var movement_speed: int = 800
 @export var dash_speed: int = 8000
@@ -68,28 +68,18 @@ func switch_potion() -> void:
 		current_potion = 0
 	switched_potion.emit()
 
-func brew_potion(i: int) -> void:
-	brewed_potions[i] += 1
-	if (brewed_potions[i] < potion_limits[i]):
-		potion_timers[i].start()
+func brew_potion(potion_type: int) -> void:
+	brewed_potions[potion_type] += 1
+	if (brewed_potions[potion_type] < potion_limits[potion_type]):
+		potion_timers[potion_type].start()
 	updated_potion.emit()
-
-func _brew_red_potion() -> void:
-	brew_potion(0)
-
-func _brew_purple_potion() -> void:
-	brew_potion(1)
-
-func _brew_green_potion() -> void:
-	brew_potion(2)
-
-func _brew_gold_potion() -> void:
-	brew_potion(3)
 
 func lose_potion() -> int:
 	if (brewed_potions[0] == -1 and brewed_potions[1] == -1 and brewed_potions[2] == -1 and brewed_potions[3] == -1):
 		die()
 		return -1
+	set_collision_layer_value(3, false)
+	$GracePeriodTimer.start()
 	var lose: int = randi_range(0, 3)
 	while (brewed_potions[lose] == -1):
 		lose = randi_range(0, 3)
@@ -101,14 +91,11 @@ func lose_potion() -> int:
 func pick_up_potion(potion_type: int) -> void:
 	brewed_potions[potion_type] = 0
 	potion_timers[potion_type].start()
+	updated_potion.emit()
 
 func _on_dash_timer_timeout() -> void:
 	in_dash = false
-
-func _on_area_2d_body_entered(_body: Node2D) -> void:
-	lose_potion()
-	$Hurtbox.set_collision_mask_value(2, false)
-	$GracePeriodTimer.start()
+	set_collision_layer_value(5, false)
 
 func fall_in_hole() -> void:
 	die()
@@ -118,4 +105,4 @@ func die() -> void:
 	$Sprite2D.hide()
 
 func _on_grace_period_timer_timeout() -> void:
-	$Hurtbox.set_collision_mask_value(2, true)
+	set_collision_layer_value(3, true)

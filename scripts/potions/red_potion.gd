@@ -6,6 +6,7 @@ static func new_potion(pos: Vector2) -> RedPotion:
 	var newpot : RedPotion = potion.instantiate()
 	newpot.target_position = pos
 	newpot.impact_damage = 3
+	newpot.modulate = Color.RED
 	return newpot
 
 func _explode():

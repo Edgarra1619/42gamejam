@@ -2,7 +2,7 @@ class_name Potion
 extends Area2D
 
 const	ROTATION_SPEED = 8
-const	MAX_SPEED = 400
+const	MAX_SPEED = 800
 
 static var potion: PackedScene = preload("res://scenes/potion.tscn")
 

@@ -67,7 +67,6 @@ position = Vector2(3008, 1536)
 wait_time = 3.0
 autostart = true
 
-[connection signal="brewed_potion" from="Player" to="Player/Hud" method="update_potion_counts"]
 [connection signal="switched_potion" from="Player" to="Player/Hud" method="update_current_potion"]
-[connection signal="threw_potion" from="Player" to="Player/Hud" method="update_potion_counts"]
+[connection signal="updated_potion" from="Player" to="Player/Hud" method="update_potion_counts"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="spawn_enemy"]
