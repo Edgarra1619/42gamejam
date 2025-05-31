@@ -3,18 +3,24 @@ extends CharacterBody2D
 
 signal switched_potion
 signal threw_potion
+signal brewed_potion
+
+static var player : Player
 
 @export var movement_speed: int = 800
 @export var dash_speed: int = 8000
 var in_dash: bool = false
 var dash_destination: Vector2
-static var player : Player
 
+const potion_limits: Array = [3, 1, 1, 1]
 static var potions: Array = [RedPotion, PurplePotion, GreenPotion, GoldPotion]
+var potion_timers: Array
+var brewed_potions: Array = potion_limits.duplicate(true)
 var current_potion: int = 0
 
 func _ready() -> void:
 	player = self
+	potion_timers = [$RedPotionTimer, $PurplePotionTimer, $GreenPotionTimer, $GoldPotionTimer]
 	pass
 
 func _process(_delta: float) -> void:
@@ -43,6 +49,11 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func throw() -> void:
+	if (brewed_potions[current_potion] < 1):
+		return
+	brewed_potions[current_potion] -= 1
+	if (potion_timers[current_potion].is_stopped()):
+		potion_timers[current_potion].start()
 	var pos : Vector2 = get_global_mouse_position()
 	var new_potion : Potion = potions[current_potion].new_potion(pos)
 	get_tree().current_scene.add_child(new_potion)
@@ -55,6 +66,24 @@ func switch_potion() -> void:
 	else:
 		current_potion = 0
 	switched_potion.emit()
+
+func brew_potion(i: int) -> void:
+	brewed_potions[i] += 1
+	if (brewed_potions[i] < potion_limits[i]):
+		potion_timers[i].start()
+	brewed_potion.emit()
+
+func _brew_red_potion() -> void:
+	brew_potion(0)
+
+func _brew_purple_potion() -> void:
+	brew_potion(1)
+
+func _brew_green_potion() -> void:
+	brew_potion(2)
+
+func _brew_gold_potion() -> void:
+	brew_potion(3)
 
 func _on_dash_timer_timeout() -> void:
 	in_dash = false

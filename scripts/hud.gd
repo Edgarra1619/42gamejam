@@ -3,8 +3,11 @@ extends Control
 
 @export var player: Player
 
-func _on_player_switched_potion() -> void:
+func update_current_potion() -> void:
 	$CurrentPotion.text = str("Current Potion: ", player.current_potion)
 
-func _on_player_threw_potion() -> void:
-	pass
+func update_potion_counts() -> void:
+	$RedPotionsCount.text = str("Red Potions: ", player.brewed_potions[0])
+	$PurplePotionsCount.text = str("Purple Potions: ", player.brewed_potions[1])
+	$GreenPotionsCount.text = str("Green Potions: ", player.brewed_potions[2])
+	$GoldPotionsCount.text = str("Gold Potions: ", player.brewed_potions[3])
