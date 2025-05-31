@@ -2,12 +2,14 @@ class_name Enemy
 extends CharacterBody2D
 
 @export var movement_speed: int = 400
-var health: int = 3
-var is_slowed: bool = false
-var goldified: bool = false
+var 		health: int = 3
+var			is_slowed: bool = false
+var			goldified: bool = false
+var			target: Node2D
 
 func _ready() -> void:
-	pass
+	if Player.player:
+		target = Player.player
 
 func _process(delta: float) -> void:
 	if (health <= 0):
@@ -16,8 +18,8 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if (goldified):
 		velocity = Vector2.ZERO
-	elif (Player.player):
-		var direction = global_position.move_toward(Player.player.global_position, movement_speed * delta) - global_position
+	elif target:
+		var direction = global_position.move_toward(target.global_position, movement_speed * delta) - global_position
 		velocity = direction / delta
 		if (is_slowed):
 			velocity /= 2

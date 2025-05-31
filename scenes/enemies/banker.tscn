@@ -9,6 +9,7 @@ size = Vector2(96, 96)
 [node name="banker" type="CharacterBody2D"]
 z_index = 80
 collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_g6001")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -27,10 +28,13 @@ one_shot = true
 wait_time = 5.0
 one_shot = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_md0e3")
 
 [connection signal="timeout" from="PoisonDamageTimer" to="." method="_receive_poison_damage"]
 [connection signal="timeout" from="GoldTimer" to="." method="break_free"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_body_entered"]
