@@ -30,11 +30,6 @@ one_shot = true
 [node name="HoleTimer" type="Timer" parent="."]
 wait_time = 3.0
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_md0e3")
-
 [connection signal="timeout" from="PoisonDamageTimer" to="." method="_receive_poison_damage"]
 [connection signal="timeout" from="GoldTimer" to="." method="break_free"]
 [connection signal="timeout" from="HoleTimer" to="." method="dig_hole"]
