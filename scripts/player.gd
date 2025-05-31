@@ -1,26 +1,27 @@
 class_name Player
 extends CharacterBody2D
 
+signal switched_potion
+signal threw_potion
+
 @export var movement_speed: int = 800
 @export var dash_speed: int = 8000
-@export var potion: PackedScene
 var in_dash: bool = false
 var dash_destination: Vector2
 static var player : Player
+
+static var potions: Array = [RedPotion, PurplePotion, GreenPotion, GoldPotion]
+var current_potion: int = 0
 
 func _ready() -> void:
 	player = self
 	pass
 
-func throw() -> void:
-	var pos : Vector2 = get_global_mouse_position()
-	var new_potion : Potion = RedPotion.new_potion(pos)
-	get_tree().current_scene.add_child(new_potion)
-	new_potion.global_position = global_position
-
 func _process(_delta: float) -> void:
 	if (Input.is_action_just_pressed("throw_potion")):
 		throw()
+	if (Input.is_action_just_pressed("switch_potion")):
+		switch_potion()
 
 func _physics_process(delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
@@ -41,12 +42,26 @@ func _physics_process(delta: float) -> void:
 		velocity = direction * movement_speed
 	move_and_slide()
 
+func throw() -> void:
+	var pos : Vector2 = get_global_mouse_position()
+	var new_potion : Potion = potions[current_potion].new_potion(pos)
+	get_tree().current_scene.add_child(new_potion)
+	new_potion.global_position = global_position
+	threw_potion.emit()
+
+func switch_potion() -> void:
+	if (current_potion < potions.size() - 1):
+		current_potion += 1
+	else:
+		current_potion = 0
+	switched_potion.emit()
+
 func _on_dash_timer_timeout() -> void:
 	in_dash = false
 
 func _on_area_2d_body_entered(_body: Node2D) -> void:
 	set_deferred("process_mode", PROCESS_MODE_DISABLED)
 
-func fall_in_hole() ->void:
+func fall_in_hole() -> void:
 	set_deferred("process_mode", PROCESS_MODE_DISABLED)
 	$Sprite2D.hide()

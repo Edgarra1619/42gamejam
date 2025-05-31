@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6uwh7sd3cd2n"]
+
+[ext_resource type="Script" uid="uid://b4crbr0gjsei0" path="res://scripts/hud.gd" id="1_ahhtf"]
+
+[node name="Hud" type="Control"]
+z_index = 1000
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ahhtf")
+
+[node name="CurrentPotion" type="Label" parent="."]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 139.0
+offset_bottom = 39.0
+text = "Current Potion: 0"
+
+[node name="RedPotionsCount" type="Label" parent="."]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 126.0
+offset_bottom = 71.0
+text = "Red Potions: 3"
+
+[node name="PurplePotionsCount" type="Label" parent="."]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 80.0
+offset_right = 147.0
+offset_bottom = 103.0
+text = "Purple Potions: 1"
+
+[node name="GreenPotionsCount" type="Label" parent="."]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 112.0
+offset_right = 147.0
+offset_bottom = 135.0
+text = "Green Potions: 1"
+
+[node name="GoldPotionsCount" type="Label" parent="."]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 144.0
+offset_right = 147.0
+offset_bottom = 167.0
+text = "Gold Potions: 1"
