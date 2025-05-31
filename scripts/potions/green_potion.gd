@@ -14,8 +14,10 @@ static func new_potion(pos : Vector2) -> GreenPotion:
 func _explode():
 	if (!dest_clock.is_stopped()):
 		return
-	var new_acid_pool: AcidPool = acid_pool.instantiate()
-	get_tree().current_scene.add_child(new_acid_pool)
-	new_acid_pool.global_position = global_position
+	(func (pos : Vector2):
+		var new_acid_pool: AcidPool = acid_pool.instantiate()
+		get_tree().current_scene.add_child(new_acid_pool)
+		new_acid_pool.global_position = pos
+	).call_deferred(global_position)
 	super()
 	pass
