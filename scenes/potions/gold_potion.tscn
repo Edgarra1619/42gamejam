@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://vuqgeva383kk"]
+[gd_scene load_steps=5 format=3 uid="uid://dn0dbny8ocmr8"]
 
-[ext_resource type="Script" uid="uid://dr8gfrlpim6n4" path="res://scripts/potion.gd" id="1_le10y"]
-[ext_resource type="Texture2D" uid="uid://cv6fbkctp6lfs" path="res://icon.svg" id="1_ym5ma"]
+[ext_resource type="Script" uid="uid://brb87nm5icu5q" path="res://scripts/potions/gold_potion.gd" id="1_83s5m"]
+[ext_resource type="Texture2D" uid="uid://cv6fbkctp6lfs" path="res://icon.svg" id="2_hd21x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_le10y"]
 size = Vector2(32, 32)
@@ -14,15 +14,15 @@ initial_velocity_min = 103.45
 initial_velocity_max = 103.45
 gravity = Vector3(0, 98, 0)
 
-[node name="Potion" type="Area2D"]
+[node name="GoldPotion" type="Area2D"]
 z_index = 110
 collision_layer = 0
 collision_mask = 3
-script = ExtResource("1_le10y")
+script = ExtResource("1_83s5m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_ym5ma")
+texture = ExtResource("2_hd21x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_le10y")
@@ -30,10 +30,11 @@ shape = SubResource("RectangleShape2D_le10y")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 modulate = Color(1, 0, 0, 1)
 emitting = false
-texture = ExtResource("1_ym5ma")
+texture = ExtResource("2_hd21x")
 lifetime = 2.36
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_le10y")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="." method="_goldify_enemy"]
