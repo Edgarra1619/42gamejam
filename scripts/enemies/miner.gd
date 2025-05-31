@@ -4,7 +4,7 @@ extends Enemy
 func _ready() -> void:
 	$Sprite2D.modulate = Color.SALMON
 	movement_speed = 350 # slower enemy at first
-	health = 10
+	health = 9
 
 func _process(delta: float) -> void:
 	super(delta)
