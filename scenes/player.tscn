@@ -30,11 +30,11 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 4
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_qhqgy")
 
 [node name="RedPotionTimer" type="Timer" parent="."]
@@ -52,9 +52,13 @@ one_shot = true
 wait_time = 10.0
 one_shot = true
 
+[node name="GracePeriodTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="RedPotionTimer" to="." method="_brew_red_potion"]
 [connection signal="timeout" from="PurplePotionTimer" to="." method="_brew_purple_potion"]
 [connection signal="timeout" from="GreenPotionTimer" to="." method="_brew_green_potion"]
 [connection signal="timeout" from="GoldPotionTimer" to="." method="_brew_gold_potion"]
+[connection signal="timeout" from="GracePeriodTimer" to="." method="_on_grace_period_timer_timeout"]

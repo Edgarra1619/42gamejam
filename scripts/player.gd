@@ -87,12 +87,31 @@ func _brew_green_potion() -> void:
 func _brew_gold_potion() -> void:
 	brew_potion(3)
 
+func lose_potion() -> void:
+	if (brewed_potions[0] == -1 and brewed_potions[1] == -1 and brewed_potions[2] == -1 and brewed_potions[3] == -1):
+		die()
+		return
+	var lose: int = randi_range(0, 3)
+	while (brewed_potions[lose] == -1):
+		lose = randi_range(0, 3)
+	potion_timers[lose].stop()
+	brewed_potions[lose] = -1
+
 func _on_dash_timer_timeout() -> void:
 	in_dash = false
 
 func _on_area_2d_body_entered(_body: Node2D) -> void:
-	set_deferred("process_mode", PROCESS_MODE_DISABLED)
+	lose_potion()
+	$Hurtbox.set_collision_mask_value(2, false)
+	$GracePeriodTimer.start()
+	brewed_potion.emit()
 
 func fall_in_hole() -> void:
+	die()
+
+func die() -> void:
 	set_deferred("process_mode", PROCESS_MODE_DISABLED)
 	$Sprite2D.hide()
+
+func _on_grace_period_timer_timeout() -> void:
+	$Hurtbox.set_collision_mask_value(2, true)
