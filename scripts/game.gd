@@ -6,6 +6,7 @@ static var enemies: Array = [
 	preload("res://scenes/enemies/miner.tscn"),
 	preload("res://scenes/enemies/banker.tscn")
 ]
+static var game : Game = self
 var doors: Array
 
 func _ready() -> void:

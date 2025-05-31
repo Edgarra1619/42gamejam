@@ -28,6 +28,8 @@ func _on_body_entered(body: Node) -> void:
 			choose_escape()
 
 func choose_escape() -> void:
+	if (escape_routes.is_empty()):
+		escape_routes = Game.game.doors
 	var	closest = INF
 	target = escape_routes[0]
 	for exit in escape_routes:
