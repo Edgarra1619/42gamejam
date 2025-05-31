@@ -33,6 +33,7 @@ func _physics_process(delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
 	if (Input.is_action_just_pressed("dash") and $DashCooldownTimer.is_stopped()):
 		in_dash = true
+		set_collision_layer_value(5, true)
 		dash_destination = get_global_mouse_position()
 		$DashTimer.start()
 		$DashCooldownTimer.start()
@@ -41,6 +42,7 @@ func _physics_process(delta: float) -> void:
 		velocity = direction / delta
 		if direction.is_zero_approx():
 			in_dash = false
+			set_collision_layer_value(5, false)
 	else:
 		direction.x = Input.get_axis("move_left", "move_right")
 		direction.y = Input.get_axis("move_up", "move_down")
