@@ -14,10 +14,9 @@ func _ready() -> void:
 
 func throw() -> void:
 	var pos : Vector2 = get_global_mouse_position()
-	var new_potion : Potion = RedPotion.new_potion(pos)
+	var new_potion : Potion = PurplePotion.new_potion(pos)
 	get_tree().current_scene.add_child(new_potion)
 	new_potion.global_position = global_position
-
 
 func _process(_delta: float) -> void:
 	if (Input.is_action_just_pressed("throw_potion")):

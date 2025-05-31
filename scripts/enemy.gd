@@ -45,3 +45,10 @@ func turn_gold(duration: float = 2.0) -> void:
 func break_free():
 	goldified = false
 	$Sprite2D.modulate = Color.WHITE
+	
+func get_poisoned() -> void:
+	$Sprite2D.modulate = Color(0.5, 0, 0.5, 1)
+	$PoisonDamageTimer.start()
+
+func _receive_poison_damage() -> void:
+	receive_damage(1)
