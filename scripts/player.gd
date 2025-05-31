@@ -45,7 +45,8 @@ func _on_dash_timer_timeout() -> void:
 	in_dash = false
 
 func _on_area_2d_body_entered(_body: Node2D) -> void:
-	set_deferred("process_mode", PROCESS_MODE_DISABLED)
+	#set_deferred("process_mode", PROCESS_MODE_DISABLED)
+	pass
 
 func fall_in_hole() ->void:
 	set_deferred("process_mode", PROCESS_MODE_DISABLED)
