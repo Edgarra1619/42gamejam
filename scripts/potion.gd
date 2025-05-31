@@ -8,13 +8,12 @@ static var potion : PackedScene = preload("res://scenes/potion.tscn")
 
 @onready var dest_clock: Timer = Timer.new()
 var target_position : Vector2
+var impact_damage: int
 
 static func new_potion(pos : Vector2) -> Potion:
 	var newpot : Potion = potion.instantiate()
 	newpot.target_position = pos
 	return newpot
-
-
 
 func _process(delta: float) -> void:
 	if (dest_clock.is_stopped()):
@@ -37,4 +36,4 @@ func _explode() -> void:
 
 func _on_body_entered(_body:Node2D) -> void:
 	_explode()
-
+	_body.receive_damage(impact_damage)
