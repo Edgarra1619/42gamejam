@@ -1,7 +1,7 @@
 class_name Banker
 extends Enemy
 
-@export var	escape_routes: Array[Node2D]
+@export var	escape_routes: Array
 var			target_escape: Node2D
 
 func _ready() -> void:

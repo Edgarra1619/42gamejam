@@ -27,7 +27,7 @@ wait_time = 0.25
 one_shot = true
 
 [node name="DashCooldownTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 3.0
 one_shot = true
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -38,14 +38,15 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_qhqgy")
 
 [node name="RedPotionTimer" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
 
 [node name="PurplePotionTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 6.0
 one_shot = true
 
 [node name="GreenPotionTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 6.0
 one_shot = true
 
 [node name="GoldPotionTimer" type="Timer" parent="."]

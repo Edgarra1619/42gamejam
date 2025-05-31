@@ -12,6 +12,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ahhtf")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 176.0
+color = Color(0, 0, 0, 1)
+
 [node name="CurrentPotion" type="Label" parent="."]
 layout_mode = 1
 offset_left = 16.0

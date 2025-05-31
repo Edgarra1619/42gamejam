@@ -2,8 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 signal switched_potion
-signal threw_potion
-signal brewed_potion
+signal updated_potion
 
 static var player : Player
 
@@ -60,7 +59,7 @@ func throw() -> void:
 	var new_potion : Potion = potions[current_potion].new_potion(pos)
 	get_tree().current_scene.add_child(new_potion)
 	new_potion.global_position = global_position
-	threw_potion.emit()
+	updated_potion.emit()
 
 func switch_potion() -> void:
 	if (current_potion < potions.size() - 1):
@@ -73,7 +72,7 @@ func brew_potion(i: int) -> void:
 	brewed_potions[i] += 1
 	if (brewed_potions[i] < potion_limits[i]):
 		potion_timers[i].start()
-	brewed_potion.emit()
+	updated_potion.emit()
 
 func _brew_red_potion() -> void:
 	brew_potion(0)
@@ -87,15 +86,21 @@ func _brew_green_potion() -> void:
 func _brew_gold_potion() -> void:
 	brew_potion(3)
 
-func lose_potion() -> void:
+func lose_potion() -> int:
 	if (brewed_potions[0] == -1 and brewed_potions[1] == -1 and brewed_potions[2] == -1 and brewed_potions[3] == -1):
 		die()
-		return
+		return -1
 	var lose: int = randi_range(0, 3)
 	while (brewed_potions[lose] == -1):
 		lose = randi_range(0, 3)
 	potion_timers[lose].stop()
 	brewed_potions[lose] = -1
+	updated_potion.emit()
+	return lose
+
+func pick_up_potion(potion_type: int) -> void:
+	brewed_potions[potion_type] = 0
+	potion_timers[potion_type].start()
 
 func _on_dash_timer_timeout() -> void:
 	in_dash = false
@@ -104,7 +109,6 @@ func _on_area_2d_body_entered(_body: Node2D) -> void:
 	lose_potion()
 	$Hurtbox.set_collision_mask_value(2, false)
 	$GracePeriodTimer.start()
-	brewed_potion.emit()
 
 func fall_in_hole() -> void:
 	die()
