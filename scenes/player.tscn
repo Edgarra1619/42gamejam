@@ -37,5 +37,24 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_qhqgy")
 
+[node name="RedPotionTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="PurplePotionTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="GreenPotionTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="GoldPotionTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="RedPotionTimer" to="." method="_brew_red_potion"]
+[connection signal="timeout" from="PurplePotionTimer" to="." method="_brew_purple_potion"]
+[connection signal="timeout" from="GreenPotionTimer" to="." method="_brew_green_potion"]
+[connection signal="timeout" from="GoldPotionTimer" to="." method="_brew_gold_potion"]
