@@ -12,5 +12,9 @@ func _process(delta: float) -> void:
 		rage_mode()
 		
 func rage_mode() -> void:
-	movement_speed = 650
+	movement_speed = 750
+	$HoleTimer.start()
 	$Sprite2D.modulate = Color.RED
+	
+func dig_hole() -> void:
+	pass

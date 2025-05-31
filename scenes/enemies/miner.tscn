@@ -23,4 +23,13 @@ shape = SubResource("RectangleShape2D_md0e3")
 [node name="SlowTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="GoldTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="HoleTimer" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="timeout" from="PoisonDamageTimer" to="." method="_receive_poison_damage"]
+[connection signal="timeout" from="GoldTimer" to="." method="break_free"]
+[connection signal="timeout" from="HoleTimer" to="." method="dig_hole"]
