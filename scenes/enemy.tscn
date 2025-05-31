@@ -4,9 +4,10 @@
 [ext_resource type="Script" uid="uid://duls7htk3vck6" path="res://scripts/enemy.gd" id="1_md0e3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
-size = Vector2(128, 128)
+size = Vector2(96, 96)
 
 [node name="enemy" type="CharacterBody2D"]
+z_index = 80
 collision_layer = 2
 script = ExtResource("1_md0e3")
 
@@ -18,5 +19,8 @@ texture = ExtResource("1_7p1mj")
 shape = SubResource("RectangleShape2D_md0e3")
 
 [node name="PoisonDamageTimer" type="Timer" parent="."]
+
+[node name="SlowTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="PoisonDamageTimer" to="." method="_receive_poison_damage"]

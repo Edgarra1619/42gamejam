@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func throw() -> void:
 	var pos : Vector2 = get_global_mouse_position()
-	var new_potion : Potion = PurplePotion.new_potion(pos)
+	var new_potion : Potion = GreenPotion.new_potion(pos)
 	get_tree().current_scene.add_child(new_potion)
 	new_potion.global_position = global_position
 
@@ -44,5 +44,5 @@ func _physics_process(delta: float) -> void:
 func _on_dash_timer_timeout() -> void:
 	in_dash = false
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_area_2d_body_entered(_body: Node2D) -> void:
 	set_deferred("process_mode", PROCESS_MODE_DISABLED)

@@ -11,7 +11,7 @@ static func new_potion(pos: Vector2) -> PurplePotion:
 func _explode():
 	if (not has_exploded):
 		var enemies = $PoisonDamageArea.get_overlapping_bodies()
-		for enemy in enemies.size():
-			enemies[enemy].get_poisoned()
+		for i in enemies.size():
+			enemies[i].get_poisoned()
 	super()
 	pass

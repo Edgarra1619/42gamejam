@@ -4,10 +4,10 @@ extends Area2D
 const	ROTATION_SPEED = 8
 const	MAX_SPEED = 300
 
-static var potion : PackedScene = preload("res://scenes/potion.tscn")
+static var potion: PackedScene = preload("res://scenes/potion.tscn")
 
 @onready var dest_clock: Timer = Timer.new()
-var target_position : Vector2
+var target_position: Vector2
 var impact_damage: int
 var has_exploded: bool = false
 
