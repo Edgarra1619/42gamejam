@@ -13,4 +13,7 @@ func _explode():
 	pass
 
 func _goldify_enemy(body: Node2D) -> void:
-	body.turn_gold()
+	if (!dest_clock.is_stopped()):
+		return
+	if (body is Enemy):
+		body.turn_gold()

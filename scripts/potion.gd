@@ -9,7 +9,6 @@ static var potion: PackedScene = preload("res://scenes/potion.tscn")
 @onready var dest_clock: Timer = Timer.new()
 var target_position: Vector2
 var impact_damage: int
-#var has_exploded: bool = false
 
 static func new_potion(pos: Vector2) -> Potion:
 	var newpot : Potion = potion.instantiate()
@@ -39,11 +38,10 @@ func _explode() -> void:
 		queue_free()
 	)
 	dest_clock.start()
-#	has_exploded = true
 
-func _on_body_entered(_body: Node2D) -> void:
+func _on_body_entered(body: Node2D) -> void:
 	if (!dest_clock.is_stopped()):
 		return
-	if (_body is Enemy):
-		_body.receive_damage(impact_damage)
+	if (body is Enemy):
+		body.receive_damage(impact_damage)
 	_explode()
