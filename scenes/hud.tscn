@@ -22,6 +22,7 @@ text = "Current Potion: 0"
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer/CurrentPotion"]
 show_behind_parent = true
+layout_mode = 0
 offset_right = 160.0
 offset_bottom = 25.0
 color = Color(1, 0, 0, 1)
@@ -43,6 +44,7 @@ text = "Purple Potions: 1"
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer/PurplePotionsCount"]
 show_behind_parent = true
+layout_mode = 0
 offset_right = 25.0
 offset_bottom = 25.0
 color = Color(0.627451, 0.12549, 0.941176, 1)
@@ -53,6 +55,7 @@ text = "Green Potions: 1"
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer/GreenPotionsCount"]
 show_behind_parent = true
+layout_mode = 0
 offset_right = 25.0
 offset_bottom = 25.0
 color = Color(0, 1, 0, 1)
@@ -63,6 +66,7 @@ text = "Gold Potions: 1"
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer/GoldPotionsCount"]
 show_behind_parent = true
+layout_mode = 0
 offset_right = 25.0
 offset_bottom = 25.0
 color = Color(1, 0.843137, 0, 1)

@@ -6,3 +6,5 @@
 [node name="Banker" instance=ExtResource("1_k1dhy")]
 script = ExtResource("1_g6001")
 escape_routes = []
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_body_entered"]

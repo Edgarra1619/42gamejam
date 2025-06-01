@@ -82,4 +82,3 @@ func get_gold_rush(gold_enemy: Enemy) -> void:
 func _end_gold_rush() -> void:
 	if Player.player:
 		target = Player.player
-
