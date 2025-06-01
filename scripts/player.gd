@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 signal switched_potion
 signal updated_potion
+signal game_over
 
 static var player: Player
 
@@ -119,6 +120,7 @@ func fall_in_hole() -> void:
 func die() -> void:
 	set_deferred("process_mode", PROCESS_MODE_DISABLED)
 	$Sprite.hide()
+	game_over.emit()
 
 func _on_grace_period_timer_timeout() -> void:
 	set_collision_layer_value(3, true)
