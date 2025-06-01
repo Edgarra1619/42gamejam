@@ -49,4 +49,5 @@ func choose_escape() -> void:
 			target = exit
 
 func flee() -> void:
+	Game.game.enemy_count[enemy_type] -= 1
 	queue_free()
