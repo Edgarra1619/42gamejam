@@ -40,14 +40,15 @@ tile_set = SubResource("TileSet_pmcvi")
 position = Vector2(1536, 1536)
 metadata/_edit_group_ = true
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-
-[node name="Hud" parent="Player" node_paths=PackedStringArray("player") instance=ExtResource("4_u5sy4")]
+[node name="Hud" parent="Player" instance=ExtResource("4_u5sy4")]
 offset_left = -960.0
 offset_top = -544.0
 offset_right = -960.0
 offset_bottom = -544.0
-player = NodePath("..")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
 [node name="Doors" type="Node" parent="."]
 
