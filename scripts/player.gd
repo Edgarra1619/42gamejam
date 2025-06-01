@@ -118,7 +118,7 @@ func fall_in_hole() -> void:
 
 func die() -> void:
 	set_deferred("process_mode", PROCESS_MODE_DISABLED)
-	$Sprite2D.hide()
+	$Sprite.hide()
 
 func _on_grace_period_timer_timeout() -> void:
 	set_collision_layer_value(3, true)

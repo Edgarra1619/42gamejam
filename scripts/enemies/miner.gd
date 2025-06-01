@@ -17,6 +17,8 @@ func _process(delta: float) -> void:
 		rage_mode()
 	if (target and $AttackCooldownTimer.is_stopped() and $Hitbox.get_collision_mask_value(3) and not goldified):
 		$Sprite.flip_h = global_position < target.global_position
+	if (in_rage and not goldified and $PoisonDamageTimer.is_stopped()):
+		$Sprite.modulate = Color.RED
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if (body is not Player):
@@ -39,9 +41,10 @@ func rage_mode() -> void:
 	in_rage = true
 	movement_speed = 300
 	$HoleTimer.start()
-	$Sprite.modulate = Color.RED
 
 func dig_hole() -> void:
+	if (goldified):
+		return
 	movement_speed = 0
 	$AttackCooldownTimer.start()
 	$Hitbox.set_collision_mask_value(3, false)
@@ -57,7 +60,3 @@ func reengage_chase() ->void:
 		movement_speed = 150
 	$Sprite.play("walk")
 	$Hitbox.set_collision_mask_value(3, true)
-
-func _die() -> void:
-	Game.game.enemy_count[1] -= 1
-	super()

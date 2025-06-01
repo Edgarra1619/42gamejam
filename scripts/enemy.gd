@@ -17,6 +17,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if (health <= 0):
 		_die()
+	if (goldified):
+		$Sprite.stop()
 
 func _physics_process(delta: float) -> void:
 	if (goldified):
@@ -38,11 +40,16 @@ func receive_damage(damage: int) -> void:
 
 func break_free():
 	goldified = false
-	$Sprite.modulate = Color.WHITE
-	$Sprite.play()
+	if ($PoisonDamageTimer.is_stopped()):
+		$Sprite.modulate = Color.WHITE
+	else:
+		$Sprite.modulate = Color(0.5, 0, 0.5, 1)
+	$Sprite.play("walk")
+	$Hitbox.set_collision_mask_value(3, true)
 
 func get_poisoned() -> void:
-	$Sprite.modulate = Color(0.5, 0, 0.5, 1)
+	if (not goldified):
+		$Sprite.modulate = Color(0.5, 0, 0.5, 1)
 	$PoisonDamageTimer.start()
 
 func _receive_poison_damage() -> void:
@@ -56,12 +63,11 @@ func get_slowed() -> void:
 	)
 
 func turn_gold() -> void:
-	if goldified:
-		return
 	goldified = true
 	$Sprite.modulate = Color.GOLD
 	$Sprite.stop()
 	$GoldTimer.start()
+	$Hitbox.set_collision_mask_value(3, false)
 	activate_gold_rush()
 
 func activate_gold_rush() -> void:

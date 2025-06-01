@@ -6,11 +6,11 @@ var			target_escape: Node2D
 var			potion_held: int = -1
 
 func _ready() -> void:
-	$Sprite2D.modulate = Color.DEEP_PINK
 	health = 6
-	movement_speed = 450
+	movement_speed = 200
 	cause_rush_chance = 35
 	enemy_type = 2
+	$Sprite.play("walk")
 	super()
 
 func _process(delta: float) -> void:
@@ -20,12 +20,21 @@ func _process(delta: float) -> void:
 		dropped_potion.global_position = global_position
 		get_tree().current_scene.add_child(dropped_potion)
 	super(delta)
+	if (target and not goldified):
+		$Sprite.flip_h = global_position < target.global_position
+
+func _physics_process(delta: float) -> void:
+	super(delta)
+	if (potion_held == -1):
+		return
+	if ((global_position - target.global_position).length() < 10):
+		flee()
 
 func _on_body_entered(body: Node) -> void:
 	if (body is Player and potion_held == -1):
 		potion_held = body.lose_potion()
 		if (potion_held != -1):
-			movement_speed = 350
+			movement_speed = 150
 			choose_escape()
 
 func choose_escape() -> void:

@@ -16,8 +16,8 @@ func _explode():
 		return
 	(func (pos : Vector2):
 		var new_acid_pool: AcidPool = acid_pool.instantiate()
-		get_tree().current_scene.add_child(new_acid_pool)
 		new_acid_pool.global_position = pos
+		get_tree().current_scene.add_child(new_acid_pool)
 	).call_deferred(global_position)
 	super()
 	pass

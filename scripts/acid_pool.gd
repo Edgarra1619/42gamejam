@@ -1,6 +1,9 @@
 class_name AcidPool
 extends Area2D
 
+func _ready():
+	_deal_damage()
+
 func _duration_over() -> void:
 	queue_free()
 

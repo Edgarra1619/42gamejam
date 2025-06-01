@@ -1,8 +1,8 @@
 class_name Game
 extends Node
 
-const MAX_ENEMIES = 2
-const ENEMY_LIMITS = [MAX_ENEMIES, 3, 3]
+const MAX_ENEMIES = 1
+const ENEMY_LIMITS = [MAX_ENEMIES, 4, 2]
 
 static var enemies: Array = [
 	preload("res://scenes/enemies/peasant.tscn"),
@@ -27,7 +27,7 @@ func spawn_enemy() -> void:
 	if (get_enemy_count() >= MAX_ENEMIES):
 		return
 	var i = randi() % enemies.size()
-	i = 1
+	i = 2
 	while (not can_spawn_enemy(i)):
 		i = randi() % enemies.size()
 	enemy_count[i] += 1

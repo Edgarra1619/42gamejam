@@ -1,7 +1,7 @@
 class_name DroppedPotion
 extends Area2D
 
-const FLY_SPEED = 400
+const FLY_SPEED = 100
 
 var potion_type: int = 0
 var fly_direction: float = 0
