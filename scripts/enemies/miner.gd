@@ -4,7 +4,7 @@ extends Enemy
 var in_rage: bool = false
 
 func _ready() -> void:
-	movement_speed = 100
+	movement_speed = 150
 	health = 9
 	cause_rush_chance = 50
 	enemy_type = 1
@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 	super(delta)
 	if (health <= 3 and not in_rage):
 		rage_mode()
-	if (target and $AttackCooldownTimer.is_stopped() and $Hitbox.get_collision_mask_value(3)):
+	if (target and $AttackCooldownTimer.is_stopped() and $Hitbox.get_collision_mask_value(3) and not goldified):
 		$Sprite.flip_h = global_position < target.global_position
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
@@ -37,7 +37,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 
 func rage_mode() -> void:
 	in_rage = true
-	movement_speed = 200
+	movement_speed = 300
 	$HoleTimer.start()
 	$Sprite.modulate = Color.RED
 
@@ -52,9 +52,9 @@ func dig_hole() -> void:
 
 func reengage_chase() ->void:
 	if (in_rage):
-		movement_speed = 200
+		movement_speed = 300
 	else:
-		movement_speed = 100
+		movement_speed = 150
 	$Sprite.play("walk")
 	$Hitbox.set_collision_mask_value(3, true)
 

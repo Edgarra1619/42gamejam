@@ -7,7 +7,7 @@ signal updated_potion
 static var player: Player
 
 @export var movement_speed: int = 300
-@export var dash_speed: int = 8000
+@export var dash_speed: int = 3000
 var in_dash: bool = false
 var dash_destination: Vector2
 
@@ -28,7 +28,7 @@ func _process(_delta: float) -> void:
 		throw()
 	if (Input.is_action_just_pressed("switch_potion")):
 		switch_potion()
-	if (not $ActionTimer.is_stopped()):
+	if (not $ActionTimer.is_stopped() or in_dash):
 		return
 	var hor_axis = Input.get_axis("move_left", "move_right")
 	if (hor_axis > 0):
@@ -48,6 +48,7 @@ func _physics_process(delta: float) -> void:
 		dash_destination = get_global_mouse_position()
 		$DashTimer.start()
 		$DashCooldownTimer.start()
+		$Sprite.flip_h = global_position < dash_destination
 	if (in_dash):
 		direction = global_position.move_toward(dash_destination, dash_speed * delta) - global_position
 		velocity = direction / delta
