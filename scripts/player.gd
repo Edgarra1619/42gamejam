@@ -55,10 +55,10 @@ func throw() -> void:
 	brewed_potions[current_potion] -= 1
 	if (potion_timers[current_potion].is_stopped()):
 		potion_timers[current_potion].start()
-	var pos : Vector2 = get_global_mouse_position()
-	var new_potion : Potion = potions[current_potion].new_potion(pos)
-	get_tree().current_scene.add_child(new_potion)
+	var target_pos : Vector2 = get_global_mouse_position()
+	var new_potion : Potion = potions[current_potion].new_potion(target_pos)
 	new_potion.global_position = global_position
+	get_tree().current_scene.add_child(new_potion)
 	updated_potion.emit()
 
 func switch_potion() -> void:

@@ -9,5 +9,9 @@ script = ExtResource("1_0jb3l")
 [node name="HoleTimer" type="Timer" parent="." index="6"]
 wait_time = 3.0
 
+[node name="AttackCooldownTimer" type="Timer" parent="." index="7"]
+one_shot = true
+
 [connection signal="timeout" from="HoleTimer" to="." method="dig_hole"]
+[connection signal="timeout" from="AttackCooldownTimer" to="." method="reengage_chase"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
