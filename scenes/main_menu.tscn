@@ -1,6 +1,44 @@
-[gd_scene load_steps=2 format=3 uid="uid://b04hbkx58x7la"]
+[gd_scene load_steps=9 format=3 uid="uid://b04hbkx58x7la"]
 
 [ext_resource type="Script" uid="uid://clvdeq1ly7ykq" path="res://scripts/menu.gd" id="1_l6cm7"]
+[ext_resource type="FontFile" uid="uid://cig23ldgpc7va" path="res://assets/antiquity-print.ttf" id="2_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://c7n1qsak2mn0i" path="res://assets/sprites/alchemist_walk.png" id="2_ekxnf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekxnf"]
+atlas = ExtResource("2_ekxnf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqqt6"]
+atlas = ExtResource("2_ekxnf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wu84c"]
+atlas = ExtResource("2_ekxnf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ln24"]
+atlas = ExtResource("2_ekxnf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rtw2f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ekxnf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqqt6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wu84c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ln24")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -13,25 +51,36 @@ script = ExtResource("1_l6cm7")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -23.0
-offset_top = -179.565
-offset_right = 23.0
-offset_bottom = -113.565
+anchor_bottom = 0.5
+offset_left = -49.07
+offset_top = -62.84
+offset_right = -3.07001
+offset_bottom = 3.16
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+scale = Vector2(2, 2)
 
 [node name="Start Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bqqt6")
 text = "Start"
 
 [node name="Quit Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bqqt6")
 text = "Exit"
+
+[node name="Selection" type="AnimatedSprite2D" parent="."]
+position = Vector2(177, 209)
+scale = Vector2(-1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_rtw2f")
+animation = &"walk"
+frame = 3
+frame_progress = 0.941185
 
 [connection signal="pressed" from="VBoxContainer/Start Button" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit Button" to="." method="_on_quit_button_pressed"]
