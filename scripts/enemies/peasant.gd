@@ -6,7 +6,7 @@ func _ready() -> void:
 	movement_speed = 200
 	cause_rush_chance = 20
 	enemy_type = 0
-	#$Sprite.play("walk")
+	$Sprite.play("walk")
 	super()
 
 func _process(delta: float) -> void:
@@ -20,7 +20,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	movement_speed = 0
 	$AttackCooldownTimer.start()
 	$Hitbox.set_collision_mask_value(3, false)
-	#$Sprite.play("attack")
+	$Sprite.play("attack")
 	var potion_type = body.lose_potion()
 	if (potion_type == -1):
 		return
@@ -33,5 +33,5 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 
 func reengage_chase() ->void:
 	movement_speed = 250
-	#$Sprite.play("walk")
+	$Sprite.play("walk")
 	$Hitbox.set_collision_mask_value(3, true)
