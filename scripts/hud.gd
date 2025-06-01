@@ -1,8 +1,8 @@
 class_name Hud
 extends CanvasLayer
 
-
 func update_current_potion() -> void:
+	
 	pass
 
 func _calc_fillness(index : int) -> float:
@@ -17,7 +17,6 @@ func _process(_delta : float):
 		$"Potions/RedPotion/Inactive".show()
 	else:
 		$"Potions/RedPotion/Inactive".hide()
-
 	$"Potions/PurplePotion/Active/Control".size.y = lerp(27, 6, _calc_fillness(1))
 	if (Player.player.brewed_potions[1] == -1):
 		$"Potions/PurplePotion/Inactive".show()
@@ -33,6 +32,8 @@ func _process(_delta : float):
 		$"Potions/GoldPotion/Inactive".show()
 	else:
 		$"Potions/GoldPotion/Inactive".hide()
+	$"Buckle".position.x = lerp($"Buckle".position.x, 18 + Player.player.current_potion * 56.0, 10 * _delta)
+
 
 func update_potion_counts() -> void:
 	$VBoxContainer/RedPotionsCount.text = str("Red Potions: ", Player.player.brewed_potions[0])

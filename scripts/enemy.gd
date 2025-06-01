@@ -10,7 +10,6 @@ var				cause_rush_chance: int
 var				target: Node2D
 var				enemy_type: int
 var				has_attacked_ally: bool = false
->>>>>>> 67b5fae68ceab058e3ede1bcb6acee5d21a25d4b
 
 func _ready() -> void:
 	if Player.player:
