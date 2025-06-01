@@ -1,6 +1,8 @@
 class_name Miner
 extends Enemy
 
+var in_rage: bool = false
+
 func _ready() -> void:
 	$Sprite2D.modulate = Color.RED
 	movement_speed = 350 # slower enemy at first
@@ -10,7 +12,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super(delta)
-	if health <= 5:
+	if (health <= 3 and not in_rage):
 		rage_mode()
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
@@ -18,9 +20,12 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		body.lose_potion()
 
 func rage_mode() -> void:
+	in_rage = true
 	movement_speed = 750
 	$HoleTimer.start()
 	$Sprite2D.modulate = Color.RED
 
 func dig_hole() -> void:
-	pass
+	var hole = preload("res://scenes/hole.tscn").instantiate()
+	hole.global_position = global_position
+	get_tree().current_scene.add_child(hole)
