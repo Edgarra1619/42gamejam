@@ -1,19 +1,9 @@
 class_name Hud
 extends CanvasLayer
 
-@onready var _max_width = $ColorRect.size.x
 
 func update_current_potion() -> void:
-	$VBoxContainer/CurrentPotion.text = str("Current Potion: ", Player.player.current_potion)
-	match Player.player.current_potion:
-		0:
-			$"VBoxContainer/CurrentPotion/ColorRect".color = Color.RED
-		1:
-			$"VBoxContainer/CurrentPotion/ColorRect".color = Color.PURPLE
-		2:
-			$"VBoxContainer/CurrentPotion/ColorRect".color = Color.GREEN
-		3:
-			$"VBoxContainer/CurrentPotion/ColorRect".color = Color.GOLD
+	pass
 
 func _calc_fillness(index : int) -> float:
 	var filled : float = Player.player.brewed_potions[index] as float / Player.player.potion_limits[index] as float
@@ -22,17 +12,27 @@ func _calc_fillness(index : int) -> float:
 	return filled
 
 func _process(_delta : float):
-	#these ones have the future calculation for how filled the flask will be	
-	$"VBoxContainer/RedPotionsCount/ColorRect".size.x = _max_width * (_calc_fillness(0))
-	$"VBoxContainer/PurplePotionsCount/ColorRect".size.x = _max_width * (_calc_fillness(1))
-	$"VBoxContainer/GreenPotionsCount/ColorRect".size.x = _max_width * (_calc_fillness(2))
-	$"VBoxContainer/GoldPotionsCount/ColorRect".size.x = _max_width * (_calc_fillness(3))
+	$"Potions/RedPotion/Active/Control".size.y = lerp(27, 6, _calc_fillness(0))
+	if (Player.player.brewed_potions[0] == -1):
+		$"Potions/RedPotion/Inactive".show()
+	else:
+		$"Potions/RedPotion/Inactive".hide()
 
-#	$"VBoxContainer/RedPotionsCount/ColorRect".size.x = _max_width * (1.0 - (Player.player.potion_timers[0].time_left / Player.player.potion_timers[0].wait_time))
-#	$"VBoxContainer/PurplePotionsCount/ColorRect".size.x = _max_width * (1.0 - (Player.player.potion_timers[1].time_left / Player.player.potion_timers[1].wait_time))
-#	$"VBoxContainer/GreenPotionsCount/ColorRect".size.x = _max_width * (1.0 - (Player.player.potion_timers[2].time_left / Player.player.potion_timers[2].wait_time))
-#	$"VBoxContainer/GoldPotionsCount/ColorRect".size.x = _max_width * (1.0 - (Player.player.potion_timers[3].time_left / Player.player.potion_timers[3].wait_time))
-
+	$"Potions/PurplePotion/Active/Control".size.y = lerp(27, 6, _calc_fillness(1))
+	if (Player.player.brewed_potions[1] == -1):
+		$"Potions/PurplePotion/Inactive".show()
+	else:
+		$"Potions/PurplePotion/Inactive".hide()
+	$"Potions/GreenPotion/Active/Control".size.y = lerp(27, 6, _calc_fillness(2))
+	if (Player.player.brewed_potions[2] == -1):
+		$"Potions/GreenPotion/Inactive".show()
+	else:
+		$"Potions/GreenPotion/Inactive".hide()
+	$"Potions/GoldPotion/Active/Control".size.y = lerp(27, 6, _calc_fillness(3))
+	if (Player.player.brewed_potions[3] == -1):
+		$"Potions/GoldPotion/Inactive".show()
+	else:
+		$"Potions/GoldPotion/Inactive".hide()
 
 func update_potion_counts() -> void:
 	$VBoxContainer/RedPotionsCount.text = str("Red Potions: ", Player.player.brewed_potions[0])
