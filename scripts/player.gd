@@ -120,6 +120,9 @@ func fall_in_hole() -> void:
 func die() -> void:
 	set_deferred("process_mode", PROCESS_MODE_DISABLED)
 	$Sprite.hide()
+	(func() :
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		).call_deferred()
 	game_over.emit()
 
 func _on_grace_period_timer_timeout() -> void:
