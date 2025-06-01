@@ -32,7 +32,6 @@ func _physics_process(delta: float) -> void:
 func _explode() -> void:
 	rotation = 0
 	dest_clock.wait_time = 5
-	$GPUParticles2D.emitting = true
 	$Sprite2D.hide()
 	dest_clock.timeout.connect(func ():
 		queue_free()
