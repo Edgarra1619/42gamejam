@@ -10,6 +10,7 @@ func _ready() -> void:
 	health = 6
 	movement_speed = 450
 	cause_rush_chance = 35
+	enemy_type = 2
 	super()
 
 func _process(delta: float) -> void:

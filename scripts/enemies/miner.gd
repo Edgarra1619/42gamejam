@@ -8,6 +8,7 @@ func _ready() -> void:
 	movement_speed = 350 # slower enemy at first
 	health = 9
 	cause_rush_chance = 50
+	enemy_type = 1
 	super()
 
 func _process(delta: float) -> void:
@@ -46,3 +47,7 @@ func reengage_chase() ->void:
 		movement_speed = 750
 	else:
 		movement_speed = 350
+
+func _die() -> void:
+	Game.game.enemy_count[1] -= 1
+	super()

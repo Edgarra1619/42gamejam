@@ -6,6 +6,7 @@ func _ready() -> void:
 	health = 3
 	movement_speed = 400
 	cause_rush_chance = 20
+	enemy_type = 0
 	super()
 
 func _on_hitbox_body_entered(body: Node2D) -> void:

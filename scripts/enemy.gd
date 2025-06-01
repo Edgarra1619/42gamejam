@@ -8,6 +8,7 @@ var				is_slowed: bool = false
 var				goldified: bool = false
 var				cause_rush_chance: int
 var				target: Node2D
+var				enemy_type: int
 
 func _ready() -> void:
 	if Player.player:
@@ -27,6 +28,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _die() -> void:
+	Game.game.enemy_count[enemy_type] -= 1
 	$Sprite2D.hide()
 	process_mode = PROCESS_MODE_DISABLED
 	queue_free()
