@@ -6,8 +6,8 @@ signal updated_potion
 
 static var player: Player
 
-@export var movement_speed: int = 800
-@export var dash_speed: int = 8000
+@export var movement_speed: int = 300
+@export var dash_speed: int = 3000
 var in_dash: bool = false
 var dash_destination: Vector2
 
@@ -20,13 +20,25 @@ var current_potion: int = 0
 func _ready() -> void:
 	player = self
 	potion_timers = [$RedPotionTimer, $PurplePotionTimer, $GreenPotionTimer, $GoldPotionTimer]
-	pass
+	$Sprite.play("idle")
+	$Sprite.flip_h = true
 
 func _process(_delta: float) -> void:
 	if (Input.is_action_just_pressed("throw_potion")):
 		throw()
 	if (Input.is_action_just_pressed("switch_potion")):
 		switch_potion()
+	if (not $ActionTimer.is_stopped() or in_dash):
+		return
+	var hor_axis = Input.get_axis("move_left", "move_right")
+	if (hor_axis > 0):
+		$Sprite.flip_h = true
+	elif (hor_axis < 0):
+		$Sprite.flip_h = false
+	if (Input.get_axis("move_left", "move_right") != 0 or Input.get_axis("move_up", "move_down") != 0):
+		$Sprite.animation = "walk"
+	else:
+		$Sprite.animation = "idle"
 
 func _physics_process(delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
@@ -36,6 +48,7 @@ func _physics_process(delta: float) -> void:
 		dash_destination = get_global_mouse_position()
 		$DashTimer.start()
 		$DashCooldownTimer.start()
+		$Sprite.flip_h = global_position < dash_destination
 	if (in_dash):
 		direction = global_position.move_toward(dash_destination, dash_speed * delta) - global_position
 		velocity = direction / delta
@@ -55,11 +68,14 @@ func throw() -> void:
 	brewed_potions[current_potion] -= 1
 	if (potion_timers[current_potion].is_stopped()):
 		potion_timers[current_potion].start()
-	var pos : Vector2 = get_global_mouse_position()
-	var new_potion : Potion = potions[current_potion].new_potion(pos)
-	get_tree().current_scene.add_child(new_potion)
+	var target_pos : Vector2 = get_global_mouse_position()
+	var new_potion : Potion = potions[current_potion].new_potion(target_pos)
 	new_potion.global_position = global_position
+	get_tree().current_scene.add_child(new_potion)
 	updated_potion.emit()
+	$ActionTimer.start()
+	$Sprite.play("throw")
+	$Sprite.flip_h = global_position < target_pos
 
 func switch_potion() -> void:
 	if (current_potion < potions.size() - 1):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfpjpy4dhcc8i"]
+[gd_scene load_steps=3 format=3 uid="uid://brmjxcfx8irr6"]
 
 [ext_resource type="Script" uid="uid://tqicowtfhi6j" path="res://scripts/enemies/banker.gd" id="1_g6001"]
 [ext_resource type="PackedScene" uid="uid://b7v3adii36nbx" path="res://scenes/enemy.tscn" id="1_k1dhy"]
@@ -6,5 +6,7 @@
 [node name="Banker" instance=ExtResource("1_k1dhy")]
 script = ExtResource("1_g6001")
 escape_routes = []
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." index="0"]
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_body_entered"]

@@ -9,7 +9,7 @@ size = Vector2(32, 32)
 [node name="DroppedPotion" type="Area2D"]
 z_index = 20
 collision_layer = 0
-collision_mask = 4
+collision_mask = 12
 script = ExtResource("1_rsvo3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -19,4 +19,9 @@ texture = ExtResource("2_75bn8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1smif")
 
+[node name="PlaceTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_player_entered"]
+[connection signal="timeout" from="PlaceTimer" to="." method="place"]

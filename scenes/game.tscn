@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=4 uid="uid://ch2hbsrwcb0hw"]
+[gd_scene load_steps=7 format=4 uid="uid://cfc31op7bplyi"]
 
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_lbhrr"]
+[ext_resource type="Script" uid="uid://girk227wfpcb" path="res://scripts/game.gd" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://cv6fbkctp6lfs" path="res://icon.svg" id="2_iywne"]
 [ext_resource type="PackedScene" uid="uid://ru3ee7bceavx" path="res://scenes/player.tscn" id="3_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b6uwh7sd3cd2n" path="res://scenes/hud.tscn" id="4_u5sy4"]
@@ -43,7 +43,6 @@ position = Vector2(1536, 1536)
 metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.25, 0.25)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0

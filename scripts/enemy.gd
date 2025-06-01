@@ -8,6 +8,7 @@ var				is_slowed: bool = false
 var				goldified: bool = false
 var				cause_rush_chance: int
 var				target: Node2D
+var				enemy_type: int
 var				has_attacked_ally: bool = false
 
 func _ready() -> void:
@@ -32,7 +33,8 @@ func _physics_process(delta: float) -> void:
 			has_attacked_ally = true
 
 func _die() -> void:
-	$Sprite2D.hide()
+	Game.game.enemy_count[enemy_type] -= 1
+	$Sprite.hide()
 	process_mode = PROCESS_MODE_DISABLED
 	queue_free()
 
@@ -41,10 +43,11 @@ func receive_damage(damage: int) -> void:
 
 func break_free():
 	goldified = false
-	$Sprite2D.modulate = Color.WHITE
-	
+	$Sprite.modulate = Color.WHITE
+	$Sprite.play()
+
 func get_poisoned() -> void:
-	$Sprite2D.modulate = Color(0.5, 0, 0.5, 1)
+	$Sprite.modulate = Color(0.5, 0, 0.5, 1)
 	$PoisonDamageTimer.start()
 
 func _receive_poison_damage() -> void:
@@ -61,11 +64,13 @@ func turn_gold() -> void:
 	if goldified:
 		return
 	goldified = true
-	$Sprite2D.modulate = Color.GOLD
+	$Sprite.modulate = Color.GOLD
+	$Sprite.stop()
 	$GoldTimer.start()
 	activate_gold_rush()
 
 func activate_gold_rush() -> void:
+	gold_rush_aoe.monitoring = true
 	await get_tree().process_frame
 	var fools = gold_rush_aoe.get_overlapping_bodies()
 	for fool in fools:
@@ -75,6 +80,7 @@ func activate_gold_rush() -> void:
 		elif fool is Peasant and fool != self:
 			if randi() % 100 < self.cause_rush_chance:
 				fool.get_gold_rush(self)
+	gold_rush_aoe.monitoring = false
 
 func get_gold_rush(gold_enemy: Enemy) -> void:
 	if goldified:
