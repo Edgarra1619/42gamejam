@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://r7fmx2v7mbte"]
+[gd_scene load_steps=5 format=3 uid="uid://r7fmx2v7mbte"]
 
 [ext_resource type="Script" uid="uid://chynbt1j25pjj" path="res://scripts/acid_pool.gd" id="1_ftlk3"]
-[ext_resource type="Texture2D" uid="uid://cv6fbkctp6lfs" path="res://icon.svg" id="2_p8tcb"]
+[ext_resource type="Texture2D" uid="uid://bpbbvgnajpget" path="res://assets/sprites/tilemapalchemist.png" id="2_p8tcb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4uibm"]
+atlas = ExtResource("2_p8tcb")
+region = Rect2(144, 128, 256, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t0uhu"]
-size = Vector2(384, 384)
+size = Vector2(256, 256)
 
 [node name="AcidPool" type="Area2D"]
 z_index = 10
@@ -15,8 +19,7 @@ script = ExtResource("1_ftlk3")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 1, 0, 1)
 position = Vector2(3.8147e-06, 1.14441e-05)
-scale = Vector2(3, 3)
-texture = ExtResource("2_p8tcb")
+texture = SubResource("AtlasTexture_4uibm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_t0uhu")
