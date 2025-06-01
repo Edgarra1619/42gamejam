@@ -1,18 +1,39 @@
-[gd_scene load_steps=8 format=3 uid="uid://brmjxcfx8irr6"]
+[gd_scene load_steps=11 format=3 uid="uid://brmjxcfx8irr6"]
 
 [ext_resource type="Script" uid="uid://tqicowtfhi6j" path="res://scripts/enemies/banker.gd" id="1_g6001"]
 [ext_resource type="PackedScene" uid="uid://b7v3adii36nbx" path="res://scenes/enemy.tscn" id="1_k1dhy"]
-[ext_resource type="Texture2D" uid="uid://dbrieu87ffrni" path="res://assets/sprites/alchemist_idle.png" id="3_k1dhy"]
+[ext_resource type="Texture2D" uid="uid://vt1jylcmu1i7" path="res://assets/sprites/banker_walk.png" id="3_k1dhy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lvble"]
 atlas = ExtResource("3_k1dhy")
 region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0806a"]
+atlas = ExtResource("3_k1dhy")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1d8e"]
+atlas = ExtResource("3_k1dhy")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xiol"]
+atlas = ExtResource("3_k1dhy")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0806a"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lvble")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0806a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1d8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xiol")
 }],
 "loop": true,
 "name": &"walk",
@@ -20,10 +41,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a1d8e"]
-size = Vector2(18, 34)
+size = Vector2(18, 28)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1xiol"]
-size = Vector2(16, 32)
+size = Vector2(16, 25.5)
 
 [node name="Banker" instance=ExtResource("1_k1dhy")]
 script = ExtResource("1_g6001")
@@ -32,12 +53,14 @@ escape_routes = []
 [node name="Sprite" type="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_0806a")
 animation = &"walk"
+frame_progress = 0.0612912
 
 [node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_a1d8e")
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2(0, -0.5)
+position = Vector2(0, 2.75)
 shape = SubResource("RectangleShape2D_1xiol")
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_body_entered"]

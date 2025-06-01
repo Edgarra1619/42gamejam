@@ -1,15 +1,87 @@
-[gd_scene load_steps=3 format=3 uid="uid://dj4yqopl4ejgv"]
+[gd_scene load_steps=14 format=3 uid="uid://dj4yqopl4ejgv"]
 
 [ext_resource type="PackedScene" uid="uid://b7v3adii36nbx" path="res://scenes/enemy.tscn" id="1_6qvxm"]
 [ext_resource type="Script" uid="uid://ey84de61ol6o" path="res://scripts/enemies/peasant.gd" id="1_f6s17"]
+[ext_resource type="Texture2D" uid="uid://hxne4834xbjs" path="res://assets/sprites/peasant_attack.png" id="3_ohl0u"]
+[ext_resource type="Texture2D" uid="uid://i4yix3i20451" path="res://assets/sprites/peasant_walk.png" id="3_w4g5s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7e0f"]
+atlas = ExtResource("3_ohl0u")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbwhj"]
+atlas = ExtResource("3_ohl0u")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohl0u"]
+atlas = ExtResource("3_w4g5s")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsi6s"]
+atlas = ExtResource("3_w4g5s")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxf44"]
+atlas = ExtResource("3_w4g5s")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mpsp"]
+atlas = ExtResource("3_w4g5s")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t7e0f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7e0f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbwhj")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohl0u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rsi6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxf44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3mpsp")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fbwhj"]
+size = Vector2(18, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wupoy"]
+size = Vector2(16, 32)
 
 [node name="Peasant" instance=ExtResource("1_6qvxm")]
 script = ExtResource("1_f6s17")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_t7e0f")
+animation = &"walk"
+frame_progress = 0.0226825
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_fbwhj")
 
 [node name="AttackCooldownTimer" type="Timer" parent="." index="7"]
 one_shot = true
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("RectangleShape2D_wupoy")
 
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="reengage_chase"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

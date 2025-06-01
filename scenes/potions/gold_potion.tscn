@@ -17,11 +17,11 @@ collision_mask = 3
 script = ExtResource("1_83s5m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_hd21x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_le10y")
 
-[connection signal="body_entered" from="." to="." method="_goldify_enemy"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="." method="_goldify_enemy"]
