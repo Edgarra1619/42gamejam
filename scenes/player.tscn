@@ -92,7 +92,7 @@ script = ExtResource("1_g2els")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_oprun")
 animation = &"throw"
-frame_progress = 0.128196
+frame_progress = 0.757398
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g2els")

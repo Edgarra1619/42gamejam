@@ -12,6 +12,7 @@ static var enemies: Array = [
 static var game: Game = self
 var doors: Array
 var enemy_count: Array = [0, 0, 0]
+var score: int = 0
 
 func _ready() -> void:
 	game = self
@@ -36,3 +37,9 @@ func spawn_enemy() -> void:
 	if (i == 2):
 		enemy.escape_routes = doors
 	get_tree().current_scene.add_child(enemy)
+
+func _on_game_over() -> void:
+	$ScoreTimer.stop()
+
+func increase_score() -> void:
+	score += 100

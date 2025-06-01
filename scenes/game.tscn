@@ -65,6 +65,11 @@ position = Vector2(3008, 1536)
 wait_time = 3.0
 autostart = true
 
+[node name="ScoreTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="game_over" from="Player" to="." method="_on_game_over"]
 [connection signal="switched_potion" from="Player" to="Hud" method="update_current_potion"]
 [connection signal="updated_potion" from="Player" to="Hud" method="update_potion_counts"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="spawn_enemy"]
+[connection signal="timeout" from="ScoreTimer" to="." method="increase_score"]
