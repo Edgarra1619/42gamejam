@@ -1,18 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://dvvt113jlflbm"]
 
 [ext_resource type="Script" uid="uid://d0oi2yxefi034" path="res://scripts/potions/purple_potion.gd" id="1_xy15j"]
-[ext_resource type="Texture2D" uid="uid://cv6fbkctp6lfs" path="res://icon.svg" id="2_s3ien"]
+[ext_resource type="Texture2D" uid="uid://j5g16s03rq1a" path="res://assets/sprites/potion_tilemap.png" id="2_mwxix"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gsri"]
+atlas = ExtResource("2_mwxix")
+region = Rect2(32, 32, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_le10y"]
 size = Vector2(32, 32)
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_le10y"]
-particle_flag_disable_z = true
-direction = Vector3(0, -1, 0)
-spread = 23.313
-initial_velocity_min = 103.45
-initial_velocity_max = 103.45
-gravity = Vector3(0, 98, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xy15j"]
 size = Vector2(384, 384)
@@ -26,19 +22,10 @@ metadata/_custom_type_script = "uid://d0oi2yxefi034"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_s3ien")
+texture = SubResource("AtlasTexture_5gsri")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_le10y")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-modulate = Color(1, 0, 0, 1)
-emitting = false
-texture = ExtResource("2_s3ien")
-lifetime = 2.36
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_le10y")
 
 [node name="PoisonDamageArea" type="Area2D" parent="."]
 collision_layer = 0
