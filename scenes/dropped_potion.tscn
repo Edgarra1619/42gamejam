@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://7b6o1q7ghj28"]
+[gd_scene load_steps=5 format=3 uid="uid://7b6o1q7ghj28"]
 
 [ext_resource type="Script" uid="uid://s1akngp1iv0f" path="res://scripts/dropped_potion.gd" id="1_rsvo3"]
-[ext_resource type="Texture2D" uid="uid://cv6fbkctp6lfs" path="res://icon.svg" id="2_75bn8"]
+[ext_resource type="Texture2D" uid="uid://j5g16s03rq1a" path="res://assets/sprites/potion_tilemap.png" id="2_rsvo3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75bn8"]
+atlas = ExtResource("2_rsvo3")
+region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1smif"]
 size = Vector2(32, 32)
@@ -13,8 +17,8 @@ collision_mask = 12
 script = ExtResource("1_rsvo3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_75bn8")
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_75bn8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1smif")
