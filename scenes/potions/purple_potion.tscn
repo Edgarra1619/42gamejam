@@ -21,7 +21,7 @@ script = ExtResource("1_xy15j")
 metadata/_custom_type_script = "uid://d0oi2yxefi034"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_5gsri")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
