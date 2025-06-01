@@ -9,6 +9,8 @@ var				goldified: bool = false
 var				cause_rush_chance: int
 var				target: Node2D
 var				enemy_type: int
+var				has_attacked_ally: bool = false
+>>>>>>> 67b5fae68ceab058e3ede1bcb6acee5d21a25d4b
 
 func _ready() -> void:
 	if Player.player:
@@ -28,6 +30,10 @@ func _physics_process(delta: float) -> void:
 		var desired_speed := direction / delta / (2 if is_slowed else 1)
 		velocity = lerp(velocity, desired_speed, 5 * delta)
 	move_and_slide()
+	if target and target is Enemy and not has_attacked_ally:
+		if global_position.distance_to(target.global_position) <= 200:
+			target.health -= 1
+			has_attacked_ally = true
 
 func _die() -> void:
 	Game.game.enemy_count[enemy_type] -= 1
@@ -92,3 +98,4 @@ func get_gold_rush(gold_enemy: Enemy) -> void:
 func _end_gold_rush() -> void:
 	if Player.player:
 		target = Player.player
+	has_attacked_ally = false
