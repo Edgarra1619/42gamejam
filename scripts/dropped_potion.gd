@@ -35,5 +35,7 @@ func place() -> void:
 	set_collision_mask_value(3, true)
 
 func _player_entered(body: Node2D) -> void:
+	if (body is not Player):
+		return
 	body.pick_up_potion(potion_type)
 	queue_free()

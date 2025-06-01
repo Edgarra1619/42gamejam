@@ -29,7 +29,7 @@ func _physics_process(delta: float) -> void:
 
 func _die() -> void:
 	Game.game.enemy_count[enemy_type] -= 1
-	$Sprite2D.hide()
+	$Sprite.hide()
 	process_mode = PROCESS_MODE_DISABLED
 	queue_free()
 
@@ -38,10 +38,11 @@ func receive_damage(damage: int) -> void:
 
 func break_free():
 	goldified = false
-	$Sprite2D.modulate = Color.WHITE
-	
+	$Sprite.modulate = Color.WHITE
+	$Sprite.play()
+
 func get_poisoned() -> void:
-	$Sprite2D.modulate = Color(0.5, 0, 0.5, 1)
+	$Sprite.modulate = Color(0.5, 0, 0.5, 1)
 	$PoisonDamageTimer.start()
 
 func _receive_poison_damage() -> void:
@@ -58,7 +59,8 @@ func turn_gold() -> void:
 	if goldified:
 		return
 	goldified = true
-	$Sprite2D.modulate = Color.GOLD
+	$Sprite.modulate = Color.GOLD
+	$Sprite.stop()
 	$GoldTimer.start()
 	activate_gold_rush()
 

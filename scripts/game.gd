@@ -1,7 +1,7 @@
 class_name Game
 extends Node
 
-const MAX_ENEMIES = 15
+const MAX_ENEMIES = 2
 const ENEMY_LIMITS = [MAX_ENEMIES, 3, 3]
 
 static var enemies: Array = [
@@ -27,6 +27,7 @@ func spawn_enemy() -> void:
 	if (get_enemy_count() >= MAX_ENEMIES):
 		return
 	var i = randi() % enemies.size()
+	i = 1
 	while (not can_spawn_enemy(i)):
 		i = randi() % enemies.size()
 	enemy_count[i] += 1

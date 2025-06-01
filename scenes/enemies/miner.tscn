@@ -1,16 +1,104 @@
-[gd_scene load_steps=3 format=3 uid="uid://3f62thmkfgot"]
+[gd_scene load_steps=16 format=3 uid="uid://3f62thmkfgot"]
 
 [ext_resource type="Script" uid="uid://d15yk610fqn0y" path="res://scripts/enemies/miner.gd" id="1_0jb3l"]
 [ext_resource type="PackedScene" uid="uid://b7v3adii36nbx" path="res://scenes/enemy.tscn" id="1_hqish"]
+[ext_resource type="Texture2D" uid="uid://4xrv8cxbvjf" path="res://assets/sprites/miner_destroy.png" id="3_kk2ai"]
+[ext_resource type="Texture2D" uid="uid://om1wl2q3ua6j" path="res://assets/sprites/miner_walk.png" id="4_tix01"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kk2ai"]
+atlas = ExtResource("3_kk2ai")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tix01"]
+atlas = ExtResource("3_kk2ai")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3l4st"]
+atlas = ExtResource("3_kk2ai")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0g7wk"]
+atlas = ExtResource("3_kk2ai")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xocek"]
+atlas = ExtResource("4_tix01")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5n6tj"]
+atlas = ExtResource("4_tix01")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m614v"]
+atlas = ExtResource("4_tix01")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbm08"]
+atlas = ExtResource("4_tix01")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6xm3w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kk2ai")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tix01")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3l4st")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0g7wk")
+}],
+"loop": true,
+"name": &"destroy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xocek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5n6tj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m614v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbm08")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0nkg"]
+size = Vector2(34, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxsm4"]
+size = Vector2(32, 48)
 
 [node name="Miner" instance=ExtResource("1_hqish")]
 script = ExtResource("1_0jb3l")
 
-[node name="HoleTimer" type="Timer" parent="." index="6"]
+[node name="Sprite" type="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_6xm3w")
+animation = &"destroy"
+frame_progress = 0.927926
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_x0nkg")
+
+[node name="HoleTimer" type="Timer" parent="." index="7"]
 wait_time = 3.0
 
-[node name="AttackCooldownTimer" type="Timer" parent="." index="7"]
+[node name="AttackCooldownTimer" type="Timer" parent="." index="8"]
 one_shot = true
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("RectangleShape2D_rxsm4")
 
 [connection signal="timeout" from="HoleTimer" to="." method="dig_hole"]
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="reengage_chase"]

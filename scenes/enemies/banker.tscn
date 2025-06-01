@@ -7,4 +7,6 @@
 script = ExtResource("1_g6001")
 escape_routes = []
 
+[node name="Sprite" type="AnimatedSprite2D" parent="." index="0"]
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_body_entered"]
