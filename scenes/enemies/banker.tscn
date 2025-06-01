@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://brmjxcfx8irr6"]
+[gd_scene load_steps=3 format=3 uid="uid://dfpjpy4dhcc8i"]
 
 [ext_resource type="Script" uid="uid://tqicowtfhi6j" path="res://scripts/enemies/banker.gd" id="1_g6001"]
 [ext_resource type="PackedScene" uid="uid://b7v3adii36nbx" path="res://scenes/enemy.tscn" id="1_k1dhy"]

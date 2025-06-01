@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://3f62thmkfgot"]
+[gd_scene load_steps=3 format=3 uid="uid://dvcq7txufutbb"]
 
 [ext_resource type="Script" uid="uid://d15yk610fqn0y" path="res://scripts/enemies/miner.gd" id="1_0jb3l"]
 [ext_resource type="PackedScene" uid="uid://b7v3adii36nbx" path="res://scenes/enemy.tscn" id="1_hqish"]

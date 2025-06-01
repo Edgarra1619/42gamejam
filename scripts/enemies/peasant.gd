@@ -5,7 +5,7 @@ func _ready() -> void:
 	$Sprite2D.modulate = Color.AQUA
 	health = 3
 	movement_speed = 400
-	cause_rush_chance = 20
+	cause_rush_chance = 50
 	super()
 
 func _on_hitbox_body_entered(body: Node2D) -> void:

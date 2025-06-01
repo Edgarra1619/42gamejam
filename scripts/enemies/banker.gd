@@ -9,7 +9,7 @@ func _ready() -> void:
 	$Sprite2D.modulate = Color.DEEP_PINK
 	health = 6
 	movement_speed = 450
-	cause_rush_chance = 35
+	cause_rush_chance = 75
 	super()
 
 func _process(delta: float) -> void:

@@ -61,7 +61,6 @@ func turn_gold() -> void:
 	activate_gold_rush()
 
 func activate_gold_rush() -> void:
-	gold_rush_aoe.monitoring = true
 	await get_tree().process_frame
 	var fools = gold_rush_aoe.get_overlapping_bodies()
 	for fool in fools:
@@ -71,7 +70,6 @@ func activate_gold_rush() -> void:
 		elif fool is Peasant and fool != self:
 			if randi() % 100 < self.cause_rush_chance:
 				fool.get_gold_rush(self)
-	gold_rush_aoe.monitoring = false
 
 func get_gold_rush(gold_enemy: Enemy) -> void:
 	if goldified:
