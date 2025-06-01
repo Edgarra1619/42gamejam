@@ -11,9 +11,9 @@ static var player: Player
 var in_dash: bool = false
 var dash_destination: Vector2
 
-const potion_limits: Array = [3, 1, 1, 1]
+const potion_limits: Array[int] = [3, 1, 1, 1]
 static var potions: Array = [RedPotion, PurplePotion, GreenPotion, GoldPotion]
-var potion_timers: Array
+var potion_timers: Array[Timer]
 var brewed_potions: Array = potion_limits.duplicate(true)
 var current_potion: int = 0
 
