@@ -1,55 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b70yxgjvdtrpn"]
+[gd_scene load_steps=3 format=3 uid="uid://brmjxcfx8irr6"]
 
 [ext_resource type="Script" uid="uid://tqicowtfhi6j" path="res://scripts/enemies/banker.gd" id="1_g6001"]
-[ext_resource type="Texture2D" uid="uid://cv6fbkctp6lfs" path="res://icon.svg" id="2_k1dhy"]
+[ext_resource type="PackedScene" uid="uid://b7v3adii36nbx" path="res://scenes/enemy.tscn" id="1_k1dhy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
-size = Vector2(96, 96)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_g6001"]
-radius = 573.022
-
-[node name="banker" type="CharacterBody2D"]
-z_index = 80
-collision_layer = 2
+[node name="Banker" instance=ExtResource("1_k1dhy")]
 script = ExtResource("1_g6001")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
-texture = ExtResource("2_k1dhy")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_md0e3")
-
-[node name="PoisonDamageTimer" type="Timer" parent="."]
-
-[node name="SlowTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="GoldTimer" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
-
-[node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-
-[node name="HitboxArea" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("RectangleShape2D_md0e3")
-
-[node name="GoldRushTimer" type="Timer" parent="."]
-wait_time = 4.0
-one_shot = true
-
-[node name="GoldRushAOE" type="Area2D" parent="."]
-visible = false
-collision_layer = 4
-collision_mask = 2
-
-[node name="SphereAOE" type="CollisionShape2D" parent="GoldRushAOE"]
-shape = SubResource("CircleShape2D_g6001")
-debug_color = Color(0.792157, 0.427451, 0, 0.192157)
-
-[connection signal="timeout" from="PoisonDamageTimer" to="." method="_receive_poison_damage"]
-[connection signal="timeout" from="GoldTimer" to="." method="break_free"]
-[connection signal="body_entered" from="Hitbox" to="." method="_on_body_entered"]
+escape_routes = []

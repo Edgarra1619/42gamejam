@@ -21,10 +21,9 @@ func _physics_process(delta: float) -> void:
 	if (goldified):
 		velocity = Vector2.ZERO
 	elif target:
-		var direction = global_position.move_toward(target.global_position, movement_speed * delta) - global_position
-		velocity = direction / delta
-		if (is_slowed):
-			velocity /= 2
+		var direction := global_position.move_toward(target.global_position, movement_speed * delta) - global_position
+		var desired_speed := direction / delta / (2 if is_slowed else 1)
+		velocity = lerp(velocity, desired_speed, 5 * delta)
 	move_and_slide()
 
 func _die() -> void:
@@ -83,3 +82,4 @@ func get_gold_rush(gold_enemy: Enemy) -> void:
 func _end_gold_rush() -> void:
 	if Player.player:
 		target = Player.player
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7v3adii36nbx"]
+[gd_scene load_steps=6 format=3 uid="uid://b7v3adii36nbx"]
 
 [ext_resource type="Texture2D" uid="uid://cv6fbkctp6lfs" path="res://icon.svg" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://duls7htk3vck6" path="res://scripts/enemy.gd" id="1_md0e3"]
@@ -9,10 +9,16 @@ size = Vector2(96, 96)
 [sub_resource type="CircleShape2D" id="CircleShape2D_md0e3"]
 radius = 573.022
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5uy6h"]
+size = Vector2(96, 96)
+
 [node name="Enemy" type="CharacterBody2D"]
 z_index = 80
 collision_layer = 2
+collision_mask = 3
+motion_mode = 1
 script = ExtResource("1_md0e3")
+push_force = 1000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 1)
@@ -42,6 +48,13 @@ monitoring = false
 [node name="SphereAOE" type="CollisionShape2D" parent="GoldRushAOE"]
 shape = SubResource("CircleShape2D_md0e3")
 debug_color = Color(0.792157, 0.427451, 0, 0.192157)
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="HitboxArea" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_5uy6h")
 
 [connection signal="timeout" from="PoisonDamageTimer" to="." method="_receive_poison_damage"]
 [connection signal="timeout" from="GoldTimer" to="." method="break_free"]
